@@ -5,4 +5,4 @@ The application connects to Artsy's API endpoint in order to retrieve an image o
 and has 10s to answer who is the author of the displayed painting. 
 
 ### NOTE
-Currently the Application is not fully polished, because the purpose of it was not be an App to upload on PlayStore, but rather for educational purpose.
+Currently the Application is not fully polished, because the purpose of it was not be an uploaded on PlayStore, but rather for educational purpose.

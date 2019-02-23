@@ -1,4 +1,4 @@
-package com.dk.artquiz
+package com.dk.artquiz.ui.artwork
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
@@ -9,26 +9,27 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import com.dk.artquiz.R
 import com.dk.artquiz.base.BaseActivity
-import com.dk.artquiz.ui.artwork.ArtworkPresenter
-import com.dk.artquiz.ui.artwork.ArtworkView
+import com.dk.artquiz.utilities.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ArtworkActivity : BaseActivity<ArtworkPresenter>(), ArtworkView, View.OnClickListener {
 
-    private lateinit var countDownTimer: CountDownTimer
+
     private lateinit var objectAnimator: ObjectAnimator
+    private var countDownTimer: CountDownTimer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Initiate on click listeners for our buttons
-        a_button.setOnClickListener(this)
-        b_button.setOnClickListener(this)
-        c_button.setOnClickListener(this)
-        d_button.setOnClickListener(this)
+        aAnswerButton.setOnClickListener(this)
+        bAnswerButton.setOnClickListener(this)
+        cAnswerButton.setOnClickListener(this)
+        dAnswerButton.setOnClickListener(this)
         tryagain_button.setOnClickListener(this)
 
         // Notify presenter that view was created
@@ -38,13 +39,14 @@ class ArtworkActivity : BaseActivity<ArtworkPresenter>(), ArtworkView, View.OnCl
 
     override fun resetTimer() {
         // User Object Animator for Smooth Scrolling
-        objectAnimator = ObjectAnimator.ofInt(progressBar, "progress", 100, 0)
+        objectAnimator = ObjectAnimator.ofInt(progressBar, OBJECT_ANIMATOR_PROPERTY_NAME, MAX_PROGRESS_BAR_VALUE, 0)
+        objectAnimator.start()
         objectAnimator.interpolator = LinearInterpolator()
-        objectAnimator.duration = 10000
+        objectAnimator.duration = TIME_TO_ANSWER_IN_MS
         objectAnimator.start()
 
         // Using CountDown Timer to determine when the time to answer is finished
-        countDownTimer = object: CountDownTimer(10000,1000) {
+        countDownTimer = object: CountDownTimer(TIME_TO_ANSWER_IN_MS, TICK_TIME_IN_MS) {
             override fun onTick(millisUntilFinished: Long) {
 
             }
@@ -55,7 +57,7 @@ class ArtworkActivity : BaseActivity<ArtworkPresenter>(), ArtworkView, View.OnCl
     }
 
     override fun stopTimer() {
-        countDownTimer.cancel()
+        countDownTimer?.cancel()
         objectAnimator.cancel()
     }
 
@@ -65,27 +67,27 @@ class ArtworkActivity : BaseActivity<ArtworkPresenter>(), ArtworkView, View.OnCl
 
         // Depending on game state, we either show answer buttons or Try again button
         if (showAnswers) {
-            a_button.visibility = VISIBLE
-            b_button.visibility = VISIBLE
-            c_button.visibility = VISIBLE
-            d_button.visibility = VISIBLE
+            aAnswerButton.visibility = VISIBLE
+            bAnswerButton.visibility = VISIBLE
+            cAnswerButton.visibility = VISIBLE
+            dAnswerButton.visibility = VISIBLE
 
             tryagain_button.visibility = GONE
         } else {
-            a_button.visibility = GONE
-            b_button.visibility = GONE
-            c_button.visibility = GONE
-            d_button.visibility = GONE
+            aAnswerButton.visibility = GONE
+            bAnswerButton.visibility = GONE
+            cAnswerButton.visibility = GONE
+            dAnswerButton.visibility = GONE
 
             tryagain_button.visibility = VISIBLE
         }
     }
 
     override fun updateAnswers(answerA: String, answerB: String, answerC: String, answerD: String) {
-        a_button.text = answerA
-        b_button.text = answerB
-        c_button.text = answerC
-        d_button.text = answerD
+        aAnswerButton.text = answerA
+        bAnswerButton.text = answerB
+        cAnswerButton.text = answerC
+        dAnswerButton.text = answerD
     }
 
     override fun updateArtwork(imageUrl: String) {
@@ -94,16 +96,16 @@ class ArtworkActivity : BaseActivity<ArtworkPresenter>(), ArtworkView, View.OnCl
     }
 
     override fun showError(error: String) {
-        Log.e("ARTQUIZ-ERROR", "ERROR ON DOWNLOAD: $error")
-        Toast.makeText(this,"ERROR ON DOWNLOAD: $error", Toast.LENGTH_LONG).show()
+        Log.e(APP_DEBUG_TAG, APP_ERROR_RESPONE + error)
+        Toast.makeText(this, APP_ERROR_RESPONE + error, Toast.LENGTH_LONG).show()
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            a_button.id -> {presenter.handleClickedAnswer(a_button.text.toString())}
-            b_button.id -> {presenter.handleClickedAnswer(b_button.text.toString())}
-            c_button.id -> {presenter.handleClickedAnswer(c_button.text.toString())}
-            d_button.id -> {presenter.handleClickedAnswer(d_button.text.toString())}
+            aAnswerButton.id -> {presenter.handleClickedAnswer(aAnswerButton.text.toString())}
+            bAnswerButton.id -> {presenter.handleClickedAnswer(bAnswerButton.text.toString())}
+            cAnswerButton.id -> {presenter.handleClickedAnswer(cAnswerButton.text.toString())}
+            dAnswerButton.id -> {presenter.handleClickedAnswer(dAnswerButton.text.toString())}
             else -> { presenter.initGame() }
         }
     }

@@ -5,7 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ArtworkActivity">
+        tools:context=".ui.artwork.ArtworkActivity">
 
 
     <ImageView
@@ -36,9 +36,9 @@
             android:text="@string/answer_a_button"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:id="@+id/a_button"
+            android:id="@+id/aAnswerButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/b_button"
+            app:layout_constraintEnd_toStartOf="@+id/bAnswerButton"
             style="@style/Base.Widget.AppCompat.ActionButton.CloseMode" app:layout_constraintHorizontal_bias="0.5"
             android:textAlignment="center"
             android:background="@drawable/oval_button"
@@ -49,11 +49,11 @@
             android:text="@string/answer_b_button"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:id="@+id/b_button"
+            android:id="@+id/bAnswerButton"
             style="@style/Base.Widget.AppCompat.ActionButton.CloseMode"
             android:textAlignment="center"
             android:background="@drawable/oval_button"
-            app:layout_constraintStart_toEndOf="@+id/a_button"
+            app:layout_constraintStart_toEndOf="@+id/aAnswerButton"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/narator_text"
             android:layout_marginBottom="32dp" app:layout_constraintBottom_toBottomOf="parent"
@@ -62,25 +62,25 @@
             android:text="@string/answer_c_button"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:id="@+id/c_button"
+            android:id="@+id/cAnswerButton"
             app:layout_constraintStart_toStartOf="parent"
             style="@style/Base.Widget.AppCompat.ActionButton.CloseMode"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/d_button" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/dAnswerButton" app:layout_constraintHorizontal_bias="0.5"
             android:textAlignment="center" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/a_button" android:background="@drawable/oval_button"
+            app:layout_constraintTop_toBottomOf="@+id/aAnswerButton" android:background="@drawable/oval_button"
             android:layout_marginBottom="8dp"/>
     <Button
             android:text="@string/answer_d_button"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:id="@+id/d_button"
+            android:id="@+id/dAnswerButton"
             style="@style/Base.Widget.AppCompat.ActionButton.CloseMode"
             android:textAlignment="center"
             android:background="@drawable/oval_button"
-            app:layout_constraintStart_toEndOf="@+id/c_button" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cAnswerButton" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/b_button"
+            app:layout_constraintTop_toBottomOf="@+id/bAnswerButton"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.504"
             android:layout_marginBottom="8dp"/>
     <TextView

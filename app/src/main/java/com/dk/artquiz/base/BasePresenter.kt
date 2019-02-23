@@ -27,6 +27,7 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
     private fun inject() {
         when (this) {
             is ArtworkPresenter -> injector.inject(this)
+            else -> {}
         }
     }
 }

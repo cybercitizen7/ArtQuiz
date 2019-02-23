@@ -15,6 +15,8 @@ class ArtworkPresenter(artworkView: ArtworkView) : BasePresenter<ArtworkView>(ar
     @Inject
     lateinit var artworkApi: ArtworkApi
 
+    private lateinit var correctAnswer: String
+    private var randomNumber: Int = 0
     private var subscription: Disposable? = null
 
     // Picasso, Rembrandt, De Goya, Da Vinci
@@ -25,9 +27,6 @@ class ArtworkPresenter(artworkView: ArtworkView) : BasePresenter<ArtworkView>(ar
         3 to listOf("De Goya", "4d8b92b44eb68a1b2c0003fe"),
         4 to listOf("Leonardo Da Vinci", "4d8b92684eb68a1b2c00009e")
     )
-
-    private lateinit var correctAnswer: String
-    private var randomNumber: Int = 0
 
     override fun onViewCreated() {
         initGame()
@@ -61,11 +60,12 @@ class ArtworkPresenter(artworkView: ArtworkView) : BasePresenter<ArtworkView>(ar
 
         // Mix random answers sort
         // we check which artist we picked and then try to scramble the rest of the answers
+        val unknownArtist: String = view.getContext().resources.getString(R.string.unknownArtist)
         when (randomNumber) {
-            1 -> { view.updateAnswers(correctAnswer, artistList[2]?.get(0) ?: "Unknown", artistList[4]?.get(0) ?: "Unknown", artistList[3]?.get(0) ?:  "Unknown") }
-            2 -> { view.updateAnswers(artistList[4]?.get(0) ?: "Unknown", correctAnswer, artistList[1]?.get(0) ?: "Unknown", artistList[3]?.get(0) ?:  "Unknown") }
-            3 -> { view.updateAnswers(artistList[2]?.get(0) ?: "Unknown", artistList[4]?.get(0) ?: "Unknown", correctAnswer, artistList[1]?.get(0) ?: "Unknown") }
-            else -> { view.updateAnswers(artistList[2]?.get(0) ?: "Unknown", artistList[4]?.get(0) ?: "Unknown", artistList[3]?.get(0) ?:  "Unknown", correctAnswer) }
+            1 -> { view.updateAnswers(correctAnswer, artistList[2]?.get(0) ?: unknownArtist, artistList[4]?.get(0) ?: unknownArtist, artistList[3]?.get(0) ?: unknownArtist) }
+            2 -> { view.updateAnswers(artistList[4]?.get(0) ?: unknownArtist, correctAnswer, artistList[1]?.get(0) ?: unknownArtist, artistList[3]?.get(0) ?: unknownArtist) }
+            3 -> { view.updateAnswers(artistList[2]?.get(0) ?: unknownArtist, artistList[4]?.get(0) ?: unknownArtist, correctAnswer, artistList[1]?.get(0) ?: unknownArtist) }
+            else -> { view.updateAnswers(artistList[2]?.get(0) ?: unknownArtist, artistList[4]?.get(0) ?: unknownArtist, artistList[3]?.get(0) ?: unknownArtist, correctAnswer) }
         }
 
         // Reset countdown timer on new fetch

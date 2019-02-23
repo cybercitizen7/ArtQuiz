@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ArtQuiz</string>
+    <string name="narrator_question">Who is the author of the above artwork:</string>
+    <string name="narrator_start">Tap here to begin!</string>
+    <string name="narrator_correct">Correct!</string>
+    <string name="narrator_wrong">Wrong!</string>
+    <string name="narrator_time_out">Times out!</string>
+    <string name="error_message">Error on request</string>
+    <string name="answer_a_button">Unknown</string>
+    <string name="answer_b_button">Unknown</string>
+    <string name="answer_c_button">Unknown</string>
+    <string name="answer_d_button">Unknown</string>
+    <string name="auth_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IiIsImV4cCI6MTU1MTQ2MzEzNiwiaWF0IjoxNTUwODU4MzM2LCJhdWQiOiI1YzcwMzg1ZjkzZTZjZjdjYTljZmMxZTkiLCJpc3MiOiJHcmF2aXR5IiwianRpIjoiNWM3MDM4NjA5MzMwNzkxZGRiNDQ1ZWM3In0.xixOe9lKw5hsWrd62EaSjE27HOJl0aFdGAhhZKB_X_8</string>
+    <string name="artwork_image">Artwork Image</string>
+    <string name="tryagain_button">Try Another one</string>
+</resources>
